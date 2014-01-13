@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <!--my less-->
+        <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
+        <script src="less-1.6.0.min.js" type="text/javascript"></script>
+        <!-- Latest compiled and minified bootstrap JavaScript-->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+        <!--JQUERY-->
+		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		<!-- Please download the JW Player plugin from http://www.longtailvideo.com/jw-player/download
+		<!--<script type="text/javascript" src="/jwplayer/jwplayer.js"></script>-->
+		<script language="JavaScript" src="scriptcam.js"></script>
+		<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+        <div id="maincontainer">
+        <div id="mynavbardiv">
+            <ul id="mynavbar">
+            <li><a href="/">Bridal Party Info</a></li>
+            <li><a href="rsvp.html">RSVP</a></li>
+            <li><a href="give.html">Give</a></li>
+            <li><a href="#">Dana & Luke's Wedding Site</a></li>
+            </ul></div> 
+        <div id="sidepanel">
+            <p id="title">Congrats Dana & Luke</p>
+            <img id="coupleimg" src="http://www.dailygalaxy.com/photos/uncategorized/2008/02/04/blue_roseartificially_coloured_2.jpg">
+            </div>
+        
+<script> 
+$(document).ready(function() {
+        $("#webcam").scriptcam({
+            showMicrophoneErrors:false,
+            onError:onError,
+            cornerRadius:20,
+            cornerColor:'e3e5e2',
+            onWebcamReady:onWebcamReady,
+            uploadImage:'myupload.jpg',
+            onPictureAsBase64:base64_tofield_and_image
+        });
+    });
+    function base64_tofield() {
+        $('#formfield').val($.scriptcam.getFrameAsBase64());
+    };
+    function base64_toimage() {
+        $('#image').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
+    };
+    function base64_tofield_and_image(b64) {
+        $('#formfield').val(b64);
+        $('#image').attr("src","data:image/png;base64,"+b64);
+    };
+    function changeCamera() {
+        $.scriptcam.changeCamera($('#cameraNames').val());
+    }
+    function onError(errorId,errorMsg) {
+        $( "#btn1" ).attr( "disabled", true );
+        $( "#btn2" ).attr( "disabled", true );
+        alert(errorMsg);
+    }			
+    function onWebcamReady(cameraNames,camera,microphoneNames,microphone,volume) {
+        $.each(cameraNames, function(index, text) {
+            $('#cameraNames').append( $('<option></option>').val(index).html(text) )
+        }); 
+        $('#cameraNames').val(camera);
+    }
+</script> 
+<div id="flexcontent">
+    		<div style="width:330px;float:left;">
+			<div id="webcam">
+			</div>
+			<div style="margin:5px;">
+				<img src="webcamlogo.png" style="vertical-align:text-top"/>
+				<select id="cameraNames" size="1" onChange="changeCamera()" style="width:245px;font-size:10px;height:25px;">
+				</select>
+			</div>
+		</div>
+		<div style="width:135px;float:left;">
+			<p><button class="btn btn-small" id="btn1" onclick="base64_tofield()">Snapshot to form</button></p>
+			<p><button class="btn btn-small" id="btn2" onclick="base64_toimage()">Snapshot to image</button></p>
+		</div>
+		<div style="width:200px;float:left;">
+			<p><textarea id="formfield" style="width:190px;height:70px;"></textarea></p>
+			<p><img id="image" style="width:200px;height:153px;"/></p>
+		</div>
+<!--    <div id="input">
+        <div id="webcam_small"></div>
+        <button class="mybutton" id="takephoto" onclick="takephoto()">Take Photo</button>
+    </div>
+    <div id="output">
+        <input type="textarea" name="photofield" id="photofield"><br>
+        <img id="reviewimage"/>
+    </div>-->
+</div>
+
+	   </div>
+    </body>
+</html>

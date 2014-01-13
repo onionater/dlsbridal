@@ -1,0 +1,294 @@
+@import "elements.less";
+@import "bootstrap/bootstrap.less";
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Istok+Web:700|Rosario:400,700|Roboto:400,700);
+//@import "bootswatch.less";
+//@import "bootswatch-variables.less";
+//@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css");
+//@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css");
+//go here to check out good fonts... http://www.google.com/fonts#ReviewPlace:refine/Collection:Source+Sans+Pro:400,600|Cabin:400,700|News+Cycle|Istok+Web:400,700|Gudea:400,700|Signika:400,600|Rosario:400,700|Roboto:400,700|Roboto+Condensed:400,700|Open+Sans:400,600|Quattrocento+Sans:400,700
+
+//@my-font-family: 'Source Sans Pro', sans-serif;
+@my-font-family: 'Istok Web', sans-serif;
+//@my-font-family: 'Rosario', sans-serif;
+//@my-font-family: 'Roboto', sans-serif;
+//@my-font-family: 'Open Sans', sans-serif;
+@light1:#DCDDD8;
+@light2:#666666;
+@accent1:#99B280;//#D74B4B;
+@accent2:#476F9F;
+@dark1:#354B5E;
+@dark2:#17273B;
+//
+//@dark1:#17375B;
+//@dark2:#17273B;
+//@light1:#AADDFF;
+//@light2:#CCEEFF;
+//@accent1:#1188cc;
+//@accent2:#11aaff;
+//@accent4:@brand-info;
+@bgcolor:@light1;
+@shadow: .5em .5em 20px black;
+//@darkfont:@dark1;
+//@lightfont:@light1;
+@defaultpadding: 3em;
+
+/*boxes keep things size appropriately regardless of borders, etc*/
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body{
+    font-size: @font-size-base;
+    background-color:@light2;
+    font-family: @my-font-family;
+    height:100%
+}
+//navbar
+#mynavbardiv{
+    position:absolute;
+    .navbar;
+    .navbar-inverse;
+    width:100%;
+    padding:.2em;
+    padding-top:.3em;
+}
+#mynavbar{
+    .nav;
+    .nav-pills;
+    .nav-justified;
+    .navbar-static-top;
+    font-size:1.5em;
+    height:2.5em;
+}
+//main structure
+#maincontainer{
+    position:relative;
+    border-radius:5px;
+    height:45em;
+    width:70em;
+    top:1em;
+    background-color:@bgcolor;
+    margin:auto;
+    //#gradient.vertical(@accent1, white);
+    //border: solid;
+}
+#sidepanel{
+    position:absolute;
+    width:21%;
+    height:80%;
+    left:1em;
+    padding:1em;
+    background-color:@accent1;
+}
+#flexcontent{
+    position:absolute;
+    width:78%;
+    height:80%;
+    right:0em;
+    padding:1%;
+}
+.link{
+    color:@accent2;
+}
+//sidepanel
+#title{
+    text-align:center;
+    margin-top:1em;
+    margin-bottom:1em;
+    font-size: 1.9em;
+    line-height: 1.2em;
+}
+#coupleimg{
+    .img-responsive;
+}
+//info
+#info{
+    padding:@defaultpadding;
+}
+h3{
+    padding-left:1em;
+}
+#directions{
+    font-size:.6em;
+}
+//rsvp
+#rsvp{
+    width:50%;
+    margin:auto;
+    padding:@defaultpadding;
+}
+#rsvptext{
+    .form-control;
+    margin-top:1.5em;
+}
+.rsvpvalues{
+    .form-control;
+    margin-top:1.5em;
+}
+#rsvpsubmit{
+    width:100%;
+    margin-top:1.5em;
+
+}
+#submitrsvp{
+    width:100%;
+    margin:auto;
+}
+//give
+#registrygifts{
+    padding:@defaultpadding;
+    padding-bottom:0em;
+}
+#madegifts{
+    padding:@defaultpadding;
+    padding-top:2em;
+}
+#mybuttongroup2{
+    #mybuttongroup;
+    margin:0em;
+    width:95%
+}
+//video
+#messagediv{
+    position:absolute;
+    margin-left: @defaultpadding;
+    margin-top: 1em;
+    top:0em;
+    height:10%;
+    width:90%;
+}
+#recorderdiv{
+    position:absolute;
+    top:10%;
+    height:90%;
+    width:98%;
+}
+#webcam {
+    position:relative; 
+    margin:15%;
+    margin-bottom:5%;
+    .box-shadow(@shadow);
+}
+#webcamvideo{
+    #webcam;
+    margin-top:10%;
+    margin-left:30%;
+    //width:50%
+}
+#mybuttongroup{
+    .btn-group;
+    .btn-group-justified;
+    width:86%;
+    margin: auto;
+}
+.mybutton{
+    .btn;
+    .btn-primary;
+    background-color:@accent2;
+    padding-left:1.5em;
+    padding-right:1.5em;
+    margin-left:1em;
+    margin-right:1em;
+}
+.mybuttonfixed{
+    .mybutton;
+    min-width:13.25em;
+}
+#vidsubmit{
+    position:relative;
+    width:86%;
+    margin:auto;
+}
+#submitvid{
+    width:95%;
+}
+#instructions{
+    line-height:1.5em;
+}
+#fineprint{
+    font-size:.75em;
+}
+//photo
+#webcamphoto{
+    #webcam;
+    //width:50%
+}
+#input{
+    position:absolute;
+    width:60%;
+    height:90%;
+    left:0em;
+}
+#output{
+    position:absolute;
+    width:40%;
+    height:90%;
+    right:0em;
+}
+#reviewimage{
+    position:absolute;
+    width:90%;
+    min-height:10em;
+    margin-left:1.2em;
+    margin-right:1em;
+    margin-top:5em;
+    horizontal-align:center;
+}
+#takephoto{
+    .btn-block;
+    width:60%;
+    margin:auto;
+}
+#submitphoto{
+    position:relative;
+    width:100%;
+    top:22.4em;
+}
+//upload
+#write{
+    padding:@defaultpadding;
+}
+#textmessage{
+    .form-control;
+}
+#savebtn{
+    .btn;
+    position:absolute;
+    right:0em;
+    margin:1em;
+    margin-right:@defaultpadding+1em;
+
+}
+//saved
+#saved{
+    padding:@defaultpadding;
+}
+//accents
+.general-icon{
+    .glyphicon;
+    margin-right:.3em;
+    margin-left:.3em;
+}
+.camera{
+    .general-icon;
+    .glyphicon-camera;
+
+}
+.upload{
+    .general-icon;
+    .glyphicon-upload;
+}
+.record{
+    .general-icon;
+    .glyphicon-record;
+}
+.pause{
+    .general-icon;
+    .glyphicon-pause;
+}
+.stop{
+    .general-icon;
+    .glyphicon-stop;
+}

@@ -1,0 +1,13 @@
+{% extends "/base.html" %}
+{%block mainbody%}
+<div id="flexcontent">
+    <div id="write">
+        <form name="myform" action="save.py" method="post">
+        <p>Write a message. Don't forget to sign it!</p>
+        <textarea id="textmessage" name="textmessage"  rows="5" placeholder="type message here"></textarea>
+        <input id="savebtn" class="mybutton" type="submit" value="Save">
+        </form>
+    </div>
+
+</div>
+{%endblock%}

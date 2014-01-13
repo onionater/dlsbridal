@@ -1,0 +1,66 @@
+{% extends "/base.html" %}
+{%block mainbody%}
+<script>
+    $(document).ready(function() {
+        $("#webcamvideo").scriptcam({ 
+            cornerRadius:20,
+            cornerColor:'e3e5e2',
+            onError:oopsError,
+            showMicrophoneErrors:false,
+            fileName:'demofilename',
+            connected:showRecord
+        });
+    });
+    function showRecord() {
+        $( "#recordStart" ).attr( "disabled", false );
+    }
+    function startRecording() {
+        $( "#recordStart" ).attr( "disabled", true );
+        $( "#recordStop" ).attr( "disabled", false );
+        $( "#recordPause" ).attr( "disabled", false );
+        $.scriptcam.startRecording();
+    }
+    function closeCamera() {
+        $("#slider").slider( "option", "disabled", true );
+        $("#recordPause" ).attr( "disabled", true );
+        $("#recordStop" ).attr( "disabled", true );
+        $("#videosaved" ).attr( "value", 1);
+        $( "#submitvid" ).attr( "disabled", false );
+        $.scriptcam.closeCamera();
+        $('#message').html('Please wait for the file conversion to finish...');
+    }
+    function pauseResumeCamera() {
+        if ($( "#recordPause" ).html() == 'Pause Recording') {
+            $( "#recordPause" ).html( "Resume Recording" );
+            $.scriptcam.pauseRecording();
+        }
+        else {
+            $( "#recordPause" ).html( "Pause Recording" );
+            $.scriptcam.resumeRecording();
+        }
+    }
+    function oopsError(errorId,errorMsg) {
+        alert(errorMsg);
+    }
+</script>
+
+<div id="flexcontent">
+    <div id="messagediv">
+        <p id="instructions">Record any kind of message you want to pass along to Dana and Luke: a song, a poem, an interpretative dance, or just a quick video wishing them good luck. You will need to grant permission for the website to access your webcam* for this option to work. </p>
+        <p id="fineprint">*If you want to record audio but not video, just cover your webcam. Very high-tech.</p>
+    </div>
+<div id="recorderdiv">
+    <div id="webcamvideo"></div>
+    <div id="mybuttongroup">
+        <a href="#" id="recordStart" class="mybuttonfixed" onclick="startRecording()" disabled><i class="record"></i>Start Recording</a> <!--a is needed for jutification-->
+        <a href="#" id="recordPause" class="mybuttonfixed" onclick="pauseResumeCamera()" disabled><i class="pause"></i>Pause Recording</a>
+        <a href="#" id="recordStop" class="mybuttonfixed" onclick="closeCamera()" disabled><i class="stop"></i>Stop Recording</a>
+    </div>
+    <form name="myform" action="save.py" method="post">
+			<input type="hidden" name="videosaved" id="videosaved" value="0"><br>
+            <div id="vidsubmit"><input type="submit" class="mybutton" id="submitvid" value="Submit Video" disabled></div>
+    </form>
+</div>
+</div>
+{%endblock%}
+

@@ -1,0 +1,21 @@
+{% extends "/base.html" %}
+{%block mainbody%}
+<div id="flexcontent">
+    <div id="rsvp">
+        <h4>Please RSVP:</h4>
+        <form name="myform" action="save.py" method="post">
+        <input id="rsvptext"type="text" name="rsvpname" placeholder="enter your name here">
+        <div id="rsvpselect">
+        <select name="rsvpvalues" class="rsvpvalues">
+          <option value="yes">Yes, I'll be there</option>
+          <option value="no">No, I can't make it</option>
+          <option value="maybe">I'm not sure yet</option>
+        </select>
+        <div id="rsvpsubmit"><input type="submit" class="mybutton" id="submitrsvp" value="SAVE"></div>
+        </form>
+        </div>
+        
+    </div>
+
+</div>
+{%endblock%}

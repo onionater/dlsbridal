@@ -1,0 +1,52 @@
+{% extends "/base.html" %}
+{%block mainbody%}
+<script> 
+$(document).ready(function() {
+        $("#webcamphoto").scriptcam({
+            showMicrophoneErrors:false,
+            onError:onError,
+            cornerRadius:20,
+            cornerColor:'e3e5e2',
+            uploadImage:'myupload.jpg',
+            onPictureAsBase64:base64_tofield_and_image
+        });
+    });
+    function base64_tofield() {
+        $('#photofield').val($.scriptcam.getFrameAsBase64());
+        base64_toimage()
+    };
+    function base64_toimage() {
+        $('#reviewimage').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
+    };
+    function base64_tofield_and_image(b64) {
+        $('#photofield').val(b64);
+        $('#reviewimage').attr("src","data:image/png;base64,"+b64);
+    };
+    function onError(errorId,errorMsg) {
+        $( "#takephoto" ).attr( "disabled", true );
+        alert(errorMsg);
+    }			
+</script> 
+<div id="flexcontent">
+    <div id="messagediv">
+        <p>Have a cute photo of Dana or Luke? Especially one with you in it? Upload it below. Note: you can deny webcam access but still upload a photo.</p>
+        <p>You can also snap a photo with your webcam. Think of a place or thing that reminds you of Luke and Dana, and take a picture of it!</p>
+    </div>
+    <div id="recorderdiv">
+    <div id="input">
+			<div id="webcamphoto"></div>
+            <button class="mybutton" id="takephoto" onclick="base64_tofield()"><i class="camera"></i>Take Photo</button>
+    </div>
+    <div id="output">
+            <form name="myform" action="save.py" method="post">
+			<input type="hidden" name="photofield" id="photofield"><br>
+            <img id="reviewimage" src="tempimg.png"/>
+            <div id="submitphoto"><input type="submit" class="mybutton" id="takephoto" value="submit photo"></div>
+            </form>
+    </div>
+    </div>
+</div>
+{%endblock%}
+
+
+
