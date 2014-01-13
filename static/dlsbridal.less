@@ -13,7 +13,7 @@
 //@my-font-family: 'Roboto', sans-serif;
 //@my-font-family: 'Open Sans', sans-serif;
 @light1:#DCDDD8;
-@light2:#666666;
+@light2:#a7abae;
 @accent1:#99B280;//#D74B4B;
 @accent2:#476F9F;
 @dark1:#354B5E;
@@ -28,6 +28,7 @@
 //@accent4:@brand-info;
 @bgcolor:@light1;
 @shadow: .5em .5em 20px black;
+@lightshadow: .3em .3em 15px @dark2;
 //@darkfont:@dark1;
 //@lightfont:@light1;
 @defaultpadding: 3em;
@@ -41,9 +42,9 @@
 
 body{
     font-size: @font-size-base;
-    background-color:@light2;
+    background-color:blue;
     font-family: @my-font-family;
-    height:100%
+    height:100%;
 }
 //navbar
 #mynavbardiv{
@@ -98,6 +99,7 @@ body{
     margin-top:1em;
     margin-bottom:1em;
     font-size: 1.9em;
+    font-weight:800;
     line-height: 1.2em;
 }
 #coupleimg{
@@ -150,6 +152,12 @@ h3{
     margin:0em;
     width:95%
 }
+.mybutton2{
+    .mybutton;
+    margin-top:1em;
+    margin-left:0em;
+    margin-right:3em;
+}
 //video
 #messagediv{
     position:absolute;
@@ -169,7 +177,6 @@ h3{
     position:relative; 
     margin:15%;
     margin-bottom:5%;
-    .box-shadow(@shadow);
 }
 #webcamvideo{
     #webcam;
@@ -234,7 +241,7 @@ h3{
     margin-left:1.2em;
     margin-right:1em;
     margin-top:5em;
-    horizontal-align:center;
+    .box-shadow(@lightshadow)
 }
 #takephoto{
     .btn-block;
@@ -252,6 +259,7 @@ h3{
 }
 #textmessage{
     .form-control;
+    .box-shadow(inset @lightshadow);
 }
 #savebtn{
     .btn;
