@@ -15,7 +15,8 @@
         });
     });
     function showMessage() {
-        bootbox.alert('Record any kind of message you wish to pass along to Dana and Luke: a song, a poem, an interpretative dance, or just a quick video wishing them good luck! \n \n You will need to grant permission for the website to access your webcam for this option to work. Before you can do this, a (very ugly) security dialog will be shown. Please click ACCEPT to record your video. If you want to record audio but not video, just cover your webcam. Yeah, we are very high-tech.');
+        mymessage='<br><p class="modalmsg">Record any kind of message you wish to pass along to Dana and Luke: a song, a poem, an interpretative dance, or just a quick video wishing them good luck! </p> <p class="modalmsg"> You will need to grant permission for the website to access your webcam for this option to work. A (very ugly) security dialog will be shown--please click ACCEPT to record your video. If you want to record audio but not video, just cover your webcam. Very high-tech :).</p>';
+        bootbox.dialog({message:mymessage, title:'Record a video', show: true, backdrop: true, closeButton: false, animate: true,  className: "my-video-modal", buttons: {continue: {label: "Continue!", className: "btn-cont",callback: function() {}}}});
     }
     function showRecord() {
         $( "#recordStart" ).attr( "disabled", false );
