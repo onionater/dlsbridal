@@ -1,22 +1,25 @@
-<!DOCTYPE html>
+<!DOCTYPE html5>
 <html>
 	<head>
-        <!--my less-->
-        <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-        <script src="less-1.6.0.min.js" type="text/javascript"></script>
-        <!-- Latest compiled and minified bootstrap JavaScript-->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
         <!--JQUERY-->
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        <!--my less-->
+        <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <script src="less-1.6.0.min.js" type="text/javascript"></script>
+        <!--prettier dialogs!-->
+        <script src="bootbox.min.js" type="text/javascript"></script>
+        <!-- Latest compiled and minified bootstrap JavaScript-->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 		<!-- Please download the JW Player plugin from http://www.longtailvideo.com/jw-player/download
 		<!--<script type="text/javascript" src="/jwplayer/jwplayer.js"></script>-->
 		<script language="JavaScript" src="scriptcam.js"></script>
 		<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
+        <div id="page">
         <div id="maincontainer">
         <div id="mynavbardiv">
             <ul id="mynavbar">
@@ -29,6 +32,8 @@
             <p id="title">Congrats Dana & Luke!</p>
             <img id="coupleimg" src="lukedana.jpg">
             </div>
+            <div id=flexcontentwrapper> <!--heh not actually a wrapper-->
+            </div>
         
 <div id="flexcontent">
     <div id="registrygifts">
@@ -37,7 +42,7 @@
     </div>
     <div id="madegifts">
         <h4>Help us make something fun for Dana and Luke!</h4>
-        <p>We want to give Dana something to remind her of her friends and family as she moves off to El Paso, TX. We are putting together a slideshow/media collection to surprise Dana with at the bridal shower. But we need your help! We would like to get some kind of personal message from each guest. You can record a short video, take a snapshot, upload a photo, or write a message. Please click below to provide a message for Dana and Luke. Once people have done this, we will put together some sort of display for the bridal shower!</p>
+        <p id="giftstext">We want to give Dana something to remind her of her friends and family as she moves off to El Paso, TX. We are putting together a slideshow/media collection to surprise Dana with at the bridal shower. But we need your help! We would like to get some kind of personal message from each guest. You can record a short video, take a snapshot, upload a photo, or write a message. Please click below to provide a message for Dana and Luke. Once people have done this, we will put together some sort of display for the bridal shower!</p>
         <div id="mybuttongroup2">
         <a href="video.html" class="mybutton2">Record a video</a> <!--a is needed for jutification-->
         <a href="photo.html" class="mybutton2">Take/upload a photo</a>
@@ -47,5 +52,6 @@
 </div>
 
 	   </div>
+     </div>
     </body>
 </html>

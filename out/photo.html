@@ -1,22 +1,25 @@
-<!DOCTYPE html>
+<!DOCTYPE html5>
 <html>
 	<head>
-        <!--my less-->
-        <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-        <script src="less-1.6.0.min.js" type="text/javascript"></script>
-        <!-- Latest compiled and minified bootstrap JavaScript-->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
         <!--JQUERY-->
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        <!--my less-->
+        <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <script src="less-1.6.0.min.js" type="text/javascript"></script>
+        <!--prettier dialogs!-->
+        <script src="bootbox.min.js" type="text/javascript"></script>
+        <!-- Latest compiled and minified bootstrap JavaScript-->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 		<!-- Please download the JW Player plugin from http://www.longtailvideo.com/jw-player/download
 		<!--<script type="text/javascript" src="/jwplayer/jwplayer.js"></script>-->
 		<script language="JavaScript" src="scriptcam.js"></script>
 		<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
+        <div id="page">
         <div id="maincontainer">
         <div id="mynavbardiv">
             <ul id="mynavbar">
@@ -29,29 +32,66 @@
             <p id="title">Congrats Dana & Luke!</p>
             <img id="coupleimg" src="lukedana.jpg">
             </div>
+            <div id=flexcontentwrapper> <!--heh not actually a wrapper-->
+            </div>
         
 <script> 
+webcamheight=640;
+webcamwidth=480;
 $(document).ready(function() {
         $("#webcamphoto").scriptcam({
-            showMicrophoneErrors:false,
-            onError:onError,
+            //showMicrophoneErrors:false,
+            //--onError:onError,
             cornerRadius:20,
             cornerColor:'e3e5e2',
             uploadImage:'myupload.jpg',
-            onPictureAsBase64:base64_tofield_and_image
+            onPictureAsBase64:base64_tofield_and_image,
+            //connected:showRecord,
+            onWebcamReady:showStuff,
+            width: webcamheight,//560,
+            height: webcamwidth,//420,
+            promptWillShow: showMessage
         });
     });
+    function showMessage() {
+        bootbox.alert('Have a cute photo of Dana or Luke? Especially one with you in it? Upload it here! You can also snap a photo with your webcam. Think of a place or thing that reminds you of Luke and Dana, and take a picture of it! \n\n A (very ugly) security dialog will be shown. Please click ACCEPT to take a photo. Note: You can select to deny webcam access, but still upload a photo.');
+    }
+    function showRecord() {
+        //$( "#takephoto" ).attr( "disabled", false );
+        //$( "#takephoto" ).show();
+        //$( "#takephoto" ).attr( "disabled", false );
+    }
+     function showStuff() {
+        //$( "#takephoto" ).attr( "disabled", false );
+        $( "#takephoto" ).html('Take Photo');
+        $( "#takephoto" ).attr( "disabled", false );
+    }
     function base64_tofield() {
         $('#photofield').val($.scriptcam.getFrameAsBase64());
-        base64_toimage()
-    };
-    function base64_toimage() {
-        $('#reviewimage').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
+        $('#webcamphoto').hide();
+        $('#takephoto').hide();
+        $('#reviewimagediv').css('display','inline-block');
+        $('#reviewimage').attr("src","data:image/png;base64,"+$('#photofield').val());
+        $('#submitphoto').show();
     };
     function base64_tofield_and_image(b64) {
         $('#photofield').val(b64);
+        $('#webcamphoto').hide();
+        $('#takephoto').hide();
+        $('#reviewimagediv').css('display','inline-block');
         $('#reviewimage').attr("src","data:image/png;base64,"+b64);
+        desiredResolution=webcamheight/webcamwidth
+        newwidth=$('#reviewimage').width();
+        newheight=$('#reviewimage').height();
+        actResolution=newwidth/newheight;
+        if (actResolution>desiredResolution){
+            console.log('too wide! resizing')
+            $('#reviewimage').css('width','100%');
+            $('#reviewimage').css('height','auto');
+        }
+        $('#submitphoto').show();
     };
+    
     function onError(errorId,errorMsg) {
         $( "#takephoto" ).attr( "disabled", true );
         alert(errorMsg);
@@ -59,24 +99,20 @@ $(document).ready(function() {
 </script> 
 <div id="flexcontent">
     <div id="messagediv">
-        <p>Have a cute photo of Dana or Luke? Especially one with you in it? Upload it below. Note: you can deny webcam access but still upload a photo.</p>
-        <p>You can also snap a photo with your webcam. Think of a place or thing that reminds you of Luke and Dana, and take a picture of it!</p>
+        <p></p>
     </div>
-    <div id="recorderdiv">
-    <div id="input">
+    <div id="recorderdivphoto">
 			<div id="webcamphoto"></div>
-            <button class="mybutton" id="takephoto" onclick="base64_tofield()"><i class="camera"></i>Take Photo</button>
-    </div>
-    <div id="output">
+            <div id="reviewimagediv"><img id="reviewimage" src="tempimg.png"/></div>
+            <button class="mybutton" id="takephoto" onclick="base64_tofield()"><i class="camera"></i>Upload Photo</button>
             <form name="myform" action="save.py" method="post">
-			<input type="hidden" name="photofield" id="photofield"><br>
-            <img id="reviewimage" src="tempimg.png"/>
-            <div id="submitphoto"><input type="submit" class="mybutton" id="takephoto" value="Submit Photo"></div>
+			<input type="hidden" name="photofield" id="photofield">
+            <input type="submit" class="mybutton" id="submitphoto" value="Submit Photo">
             </form>
-    </div>
     </div>
 </div>
 
 	   </div>
+     </div>
     </body>
 </html>

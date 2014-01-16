@@ -1,22 +1,25 @@
-<!DOCTYPE html>
+<!DOCTYPE html5>
 <html>
 	<head>
-        <!--my less-->
-        <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-        <script src="less-1.6.0.min.js" type="text/javascript"></script>
-        <!-- Latest compiled and minified bootstrap JavaScript-->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
         <!--JQUERY-->
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        <!--my less-->
+        <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <script src="less-1.6.0.min.js" type="text/javascript"></script>
+        <!--prettier dialogs!-->
+        <script src="bootbox.min.js" type="text/javascript"></script>
+        <!-- Latest compiled and minified bootstrap JavaScript-->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 		<!-- Please download the JW Player plugin from http://www.longtailvideo.com/jw-player/download
 		<!--<script type="text/javascript" src="/jwplayer/jwplayer.js"></script>-->
 		<script language="JavaScript" src="scriptcam.js"></script>
 		<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
+        <div id="page">
         <div id="maincontainer">
         <div id="mynavbardiv">
             <ul id="mynavbar">
@@ -29,18 +32,26 @@
             <p id="title">Congrats Dana & Luke!</p>
             <img id="coupleimg" src="lukedana.jpg">
             </div>
+            <div id=flexcontentwrapper> <!--heh not actually a wrapper-->
+            </div>
         
 <script>
     $(document).ready(function() {
         $("#webcamvideo").scriptcam({ 
             cornerRadius:20,
             cornerColor:'e3e5e2',
-            onError:oopsError,
+            //onError:oopsError,
             showMicrophoneErrors:false,
             fileName:'demofilename',
-            connected:showRecord
+            connected:showRecord,
+            width: 640,//560,
+            height: 480,//420,
+            promptWillShow: showMessage
         });
     });
+    function showMessage() {
+        bootbox.alert('Record any kind of message you wish to pass along to Dana and Luke: a song, a poem, an interpretative dance, or just a quick video wishing them good luck! \n \n You will need to grant permission for the website to access your webcam for this option to work. Before you can do this, a (very ugly) security dialog will be shown. Please click ACCEPT to record your video. If you want to record audio but not video, just cover your webcam. Yeah, we are very high-tech.');
+    }
     function showRecord() {
         $( "#recordStart" ).attr( "disabled", false );
     }
@@ -55,7 +66,8 @@
         $("#recordPause" ).attr( "disabled", true );
         $("#recordStop" ).attr( "disabled", true );
         $("#videosaved" ).attr( "value", 1);
-        $( "#submitvid" ).attr( "disabled", false );
+        $( "#mybuttongroup" ).hide();
+        $( "#vidsubmit" ).show();
         $.scriptcam.closeCamera();
         $('#message').html('Please wait for the file conversion to finish...');
     }
@@ -76,23 +88,23 @@
 
 <div id="flexcontent">
     <div id="messagediv">
-        <p id="instructions">Record any kind of message you want to pass along to Dana and Luke: a song, a poem, an interpretative dance, or just a quick video wishing them good luck. You will need to grant permission for the website to access your webcam* for this option to work. </p>
-        <p id="fineprint">*If you want to record audio but not video, just cover your webcam. Very high-tech.</p>
+        <p id="instructions"> </p>
     </div>
 <div id="recorderdiv">
-    <div id="webcamvideo"></div>
     <div id="mybuttongroup">
         <a href="#" id="recordStart" class="mybuttonfixed" onclick="startRecording()" disabled><i class="record"></i>Start Recording</a> <!--a is needed for jutification-->
         <a href="#" id="recordPause" class="mybuttonfixed" onclick="pauseResumeCamera()" disabled><i class="pause"></i>Pause Recording</a>
         <a href="#" id="recordStop" class="mybuttonfixed" onclick="closeCamera()" disabled><i class="stop"></i>Stop Recording</a>
     </div>
     <form name="myform" action="save.py" method="post">
-			<input type="hidden" name="videosaved" id="videosaved" value="0"><br>
-            <div id="vidsubmit"><input type="submit" class="mybutton" id="submitvid" value="Submit Video" disabled></div>
+    <input type="hidden" name="videosaved" id="videosaved" value="0">
+    <div id="vidsubmit"><input type="submit" class="mybutton" id="submitvid" value="Submit Video"></div>
     </form>
+    <div id="webcamvideo"></div>
 </div>
 </div>
 
 	   </div>
+     </div>
     </body>
 </html>

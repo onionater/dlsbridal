@@ -15,7 +15,8 @@
 @light1:#DCDDD8;
 @light2:#a7abae;
 @accent1:#99B280;//#D74B4B;
-@accent2:#476F9F;
+@accent2:#6C8CBF;//#476F9F;
+@accent2dark:#4C6286;
 @dark1:#354B5E;
 @dark2:#17273B;
 //
@@ -27,11 +28,14 @@
 //@accent2:#11aaff;
 //@accent4:@brand-info;
 @bgcolor:@light1;
+@fontcolor:@light1;
 @shadow: .5em .5em 20px black;
-@lightshadow: .3em .3em 15px @dark2;
+@lightshadow: .1em .2em 15px @dark2;
+@darkshadow: .2em .3em 20px @dark2;
 //@darkfont:@dark1;
 //@lightfont:@light1;
 @defaultpadding: 3em;
+@docheight:47em;
 
 /*boxes keep things size appropriately regardless of borders, etc*/
 * {
@@ -42,9 +46,23 @@
 
 body{
     font-size: @font-size-base;
-    background-color:blue;
+    background-color:white;
     font-family: @my-font-family;
+    font-size:.9em;
+    color:@light1;
+    height:@docheight;
+}
+p, h1, h2, h3, h4, h5 {
+    color:@fontcolor;
+    font-family: @my-font-family;
+}
+
+#page{
+    position:absolute;
+    width:100%;
     height:100%;
+    min-height:@docheight+2em;
+    background-color:@light2;
 }
 //navbar
 #mynavbardiv{
@@ -62,14 +80,15 @@ body{
     .navbar-static-top;
     font-size:1.5em;
     height:2.5em;
+    font-family: @my-font-family;
 }
 //main structure
 #maincontainer{
     position:relative;
     border-radius:5px;
-    height:45em;
+    height:@docheight;
     width:70em;
-    top:1em;
+    top:.5em;
     background-color:@bgcolor;
     margin:auto;
     //#gradient.vertical(@accent1, white);
@@ -78,23 +97,35 @@ body{
 #sidepanel{
     position:absolute;
     width:21%;
-    height:80%;
+    height:85%;
     left:1em;
     padding:1em;
     background-color:@accent1;
 }
+#flexcontentwrapper{
+    position:absolute;
+    width:76%;
+    height:85%;
+    right:1em;
+    padding:1%;
+    background-image:url('http://www.innovant.fr/wp-content/uploads/2013/05/new-york.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    opacity:.5;
+}
 #flexcontent{
     position:absolute;
-    width:78%;
-    height:80%;
-    right:0em;
-    padding:1%;
+    width:76%;
+    height:85%;
+    right:1em;
+    background-color: rgba(5,5,5,.7)
 }
 .link{
     color:@accent2;
 }
 //sidepanel
 #title{
+    color:@dark2;
     text-align:center;
     margin-top:1em;
     margin-bottom:1em;
@@ -158,42 +189,45 @@ h3{
     margin-left:0em;
     margin-right:3em;
 }
+#giftstext{
+    font-size:1.1em;
+}
 //video
 #messagediv{
     position:absolute;
     margin-left: @defaultpadding;
     margin-top: 1em;
     top:0em;
+    left:2%;
     height:10%;
-    width:90%;
+    width:89%;
 }
 #recorderdiv{
     position:absolute;
-    top:10%;
+    top:2%;
+    left:1%;
     height:90%;
     width:98%;
-}
-#webcam {
-    position:relative; 
-    margin:15%;
-    margin-bottom:5%;
+    margin:auto;
+    text-align:center;
 }
 #webcamvideo{
-    #webcam;
-    margin-top:10%;
-    margin-left:30%;
+    margin:1.2%;
+    //margin-left:6%;
     //width:50%
 }
 #mybuttongroup{
     .btn-group;
     .btn-group-justified;
-    width:86%;
+    width:88%;
     margin: auto;
 }
 .mybutton{
     .btn;
     .btn-primary;
+    font-family: @my-font-family;
     background-color:@accent2;
+    #gradient.vertical(@accent2, @accent2dark);
     padding-left:1.5em;
     padding-right:1.5em;
     margin-left:1em;
@@ -204,9 +238,9 @@ h3{
     min-width:13.25em;
 }
 #vidsubmit{
-    position:relative;
     width:86%;
     margin:auto;
+    display:none;
 }
 #submitvid{
     width:95%;
@@ -219,29 +253,26 @@ h3{
 }
 //photo
 #webcamphoto{
-    #webcam;
-    //width:50%
+    #webcamvideo;
+    margin-top:1em;
 }
-#input{
-    position:absolute;
-    width:60%;
-    height:90%;
-    left:0em;
+#recorderdivphoto{
+    #recorderdiv;
+    top:1%;
 }
-#output{
-    position:absolute;
-    width:40%;
-    height:90%;
-    right:0em;
+#reviewimagediv{
+    width:640px;
+    height:480px;
+    display:none;
+    margin:1.2%;
+    margin-top:1.9%;
+    margin-bottom:.6em;
+    text-align: center;
+    //overflow:scroll;
 }
 #reviewimage{
-    position:absolute;
-    width:90%;
-    min-height:10em;
-    margin-left:1.2em;
-    margin-right:1em;
-    margin-top:5em;
-    .box-shadow(@lightshadow)
+    height:100%;
+    .box-shadow(@darkshadow);
 }
 #takephoto{
     .btn-block;
@@ -249,9 +280,8 @@ h3{
     margin:auto;
 }
 #submitphoto{
-    position:relative;
-    width:100%;
-    top:22.4em;
+    #takephoto;
+    display:none;
 }
 //upload
 #write{
@@ -262,11 +292,11 @@ h3{
     .box-shadow(inset @lightshadow);
 }
 #savebtn{
-    .btn;
+    .mybutton;
     position:absolute;
     right:0em;
     margin:1em;
-    margin-right:@defaultpadding+1em;
+    margin-right:@defaultpadding;
 
 }
 //saved
