@@ -8,6 +8,7 @@ Created on Sun Jan 12 01:34:45 2014
 import base64
 import csv
 import datetime
+import sys
 
 #jpgtxt = base64.encodestring(open("in.jpg","rb").read())
 
@@ -18,6 +19,7 @@ datestr=date.strftime("%Y-%m-%d")
 photofile='/Users/amyskerry/documents/projects/dlsbridal/dlsbridal_save/dlsphotos.csv'
 savedir='/Users/amyskerry/documents/projects/dlsbridal/dlsbridal_save/photos/'
 allphotos=[]
+csv.field_size_limit(sys.maxsize)
 with open(photofile, 'rU') as csvfile:
     reader = csv.reader(csvfile)
     for rown, row in enumerate(reader):
@@ -25,7 +27,8 @@ with open(photofile, 'rU') as csvfile:
             photoindex=row.index('photo')
         else:
             photoentry=row[photoindex]
-            cutstring="MiniFieldStorage('photofield', '"
+            #cutstring="MiniFieldStorage('photofield', '"
+            cutstring=''
             photo=photoentry[len(cutstring):]
             allphotos.append(photo)
     

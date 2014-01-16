@@ -15,19 +15,19 @@ try:
     rsvpname=myform['rsvpname']
     rsvpval=myform['rsvpvalues']
     contentvar="RSVP"
-    sql='insert into DLSRSVP (name,rsvp) values ("%s", "%s")' %(rsvpname, rsvpval)
+    sql='insert into DLSRSVP (name,rsvp) values ("%s", "%s")' %(rsvpname.value, rsvpval.value)
 except:
     pass
 try:
     photo64=myform['photofield']
     contentvar="photo"
-    sql='insert into DLSPHOTO (photo) values ("%s")' %(photo64)
+    sql='insert into DLSPHOTO (photo) values ("%s")' %(photo64.value)
 except:
     pass
 try:
     msg=myform['textmessage']
     contentvar="text"
-    sql='insert into DLSMSG (msg) values ("%s")' %(msg)
+    sql='insert into DLSMSG (msg) values ("%s")' %(msg.value)
 except:
     pass
 try:
@@ -45,7 +45,6 @@ except:
 
 with open("saved.html", "r") as myfile: 
     newhtml=myfile.read().replace('\n', '') 
-
 newhtml=newhtml.replace('CONTENTVARIABLESTRING',contentvar)
 print newhtml 
 
