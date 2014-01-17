@@ -1,25 +1,33 @@
 {% extends "/base.html" %}
 {%block mainbody%}
 <script>
+webcamheight=640;
+webcamwidth=480;
     $(document).ready(function() {
         $("#webcamvideo").scriptcam({ 
             cornerRadius:20,
             cornerColor:'e3e5e2',
             //onError:oopsError,
             showMicrophoneErrors:false,
-            fileName:'demofilename',
+            fileName:'dlsfile',
             connected:showRecord,
-            width: 640,//560,
-            height: 480,//420,
-            promptWillShow: showMessage
+            width: webcamheight,//560,
+            height: webcamwidth,//420,
+            promptWillShow: showMessage,
+            setVolume: volume
         });
     });
+    function volume(value){
+    console.log(value)
+    }
     function showMessage() {
-        mymessage='<br><p class="modalmsg">Record any kind of message you wish to pass along to Dana and Luke: a song, a poem, an interpretative dance, or just a quick video wishing them good luck! </p> <p class="modalmsg"> You will need to grant permission for the website to access your webcam for this option to work. A (very ugly) security dialog will be shown--please click ACCEPT to record your video. If you want to record audio but not video, just cover your webcam. Very high-tech :).</p>';
+        mymessage='<br><p class="modalmsg">Record any kind of message you wish to pass along to Dana and Luke: a song, a poem, an interpretative dance, or just a quick video wishing them good luck! </p> <p class="modalmsg"> You will need to grant permission for the website to access your webcam for this option to work. A (very ugly) security dialog will be shown--please select ALLOW to record your video. If you want to record audio but not video, just cover your webcam. Very high-tech :).</p>';
         bootbox.dialog({message:mymessage, title:'Record a video', show: true, backdrop: true, closeButton: false, animate: true,  className: "my-video-modal", buttons: {continue: {label: "Continue!", className: "btn-cont",callback: function() {}}}});
     }
     function showRecord() {
         $( "#recordStart" ).attr( "disabled", false );
+        $.scriptcam.changeVolume(75);
+
     }
     function startRecording() {
         $( "#recordStart" ).attr( "disabled", true );

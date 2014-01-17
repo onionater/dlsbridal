@@ -39,9 +39,6 @@ try:
     cursor.execute(sql)
 except:
     pass
-#g = open("/home/www/mindhive/saxe/aesvid/files/aesoutput"+str(random.randint(0,10000))+".jpg", "w")
-#g.write(base64.decodestring(photo64))
-#g.close()
 
 with open("saved.html", "r") as myfile: 
     newhtml=myfile.read().replace('\n', '') 

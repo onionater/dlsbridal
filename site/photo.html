@@ -19,7 +19,7 @@ $(document).ready(function() {
         });
     });
     function showMessage() {
-        mymessage='<p class="modalmsg">Have a cute photo of Dana or Luke? Especially one with you in it? Upload it here! You can also snap a photo with your webcam. Think of a place or thing that reminds you of Luke and Dana, and take a picture of it! </p> <p class="modalmsg"> A (very ugly) security dialog will be shown--please click ACCEPT to take a photo. Note: You can select to deny webcam access, but still upload a photo.<p>'
+        mymessage='<p class="modalmsg">Have a cute photo of Dana or Luke? Especially one with you in it? Upload it here! You can also snap a photo with your webcam. Think of a place or thing that reminds you of Luke and Dana, and take a picture of it! </p> <p class="modalmsg"> A (very ugly) security dialog will be shown--please select ALLOW to take a photo. Note: You can select to deny webcam access, but still upload a photo.<p>'
         bootbox.dialog({message:mymessage, title:'Photos', show: true, backdrop: true, closeButton: false, animate: true,  className: "my-photo-modal", buttons: {continue: {label: "Continue!", className: "btn-cont",callback: function() {}}}});
     }
     function showRecord() {
