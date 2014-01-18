@@ -1,4 +1,5 @@
 #!/usr/bin/python
+###!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
 
 import cgitb, cgi, MySQLdb, ast
 #import cgitb, cgi, ast
@@ -7,10 +8,13 @@ import random
 
 myform=cgi.FieldStorage()
 cgitb.enable()
-cursor = MySQLdb.connect(host="localhost",user="askerry",passwd="password",db="aesbehave").cursor()
+cursor = #MySQLdb.connect(host="localhost",user="askerry",passwd="password",db="aesbehave").cursor()
 
 print 'Content-type:text/html\n\n'
-
+#print 'testing'
+#print myform.keys()
+#print myform.items()
+contentvar='?'
 try:
     rsvpname=myform['rsvpname']
     rsvpval=myform['rsvpvalues']
@@ -20,8 +24,11 @@ except:
     pass
 try:
     photo64=myform['photofield']
-    contentvar="photo"
-    sql='insert into DLSPHOTO (photo) values ("%s")' %(photo64.value)
+    photo64= photo64.value.split(',')
+    for photo in photo64:
+        if 'base64' not in photo:
+            contentvar="photo"
+            sql='insert into DLSPHOTO (photo) values ("%s")' %(photo)
 except:
     pass
 try:
@@ -36,12 +43,29 @@ try:
 except:
     pass
 try:
+    print sql
     cursor.execute(sql)
 except:
     pass
+try:
+    contentvar='photo'
+    photo64=myform['uploadedphotos']
+    photo64=photo64.value.split(',')
+    #print len(photo64)
+    for photo in photo64:
+        if 'base64' not in photo:
+            #print photo
+            multisql='insert into DLSPHOTO (photo) values ("%s")' %(photo)
+            #print multisql
+            try:
+                cursor.execute(multisql)
+                #print "photo uploaded"
+            except:
+                pass
+except:
+    pass    
 
 with open("saved.html", "r") as myfile: 
     newhtml=myfile.read().replace('\n', '') 
 newhtml=newhtml.replace('CONTENTVARIABLESTRING',contentvar)
 print newhtml 
-

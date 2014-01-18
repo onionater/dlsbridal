@@ -9,6 +9,8 @@
         <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
         <script src="less-1.6.0.min.js" type="text/javascript"></script>
+        <!--for prettier file input-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
         <!--prettier dialogs!-->
         <script src="bootbox.min.js" type="text/javascript"></script>
         <!-- Latest compiled and minified bootstrap JavaScript-->
@@ -105,6 +107,7 @@ webcamwidth=480;
         <a href="#" id="recordPause" class="mybuttonfixed" onclick="pauseResumeCamera()" disabled><i class="pause"></i>Pause Recording</a>
         <a href="#" id="recordStop" class="mybuttonfixed" onclick="closeCamera()" disabled><i class="stop"></i>Stop Recording</a>
     </div>
+    <!--<form name="myform" action="cgi-bin/save.py" method="post">-->
     <form name="myform" action="save.py" method="post">
     <input type="hidden" name="videosaved" id="videosaved" value="0">
     <div id="vidsubmit"><input type="submit" class="mybutton" id="submitvid" value="Submit Video"></div>

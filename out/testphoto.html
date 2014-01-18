@@ -1,58 +1,30 @@
-{% extends "/base.html" %}
-{%block mainbody%}
+<!DOCTYPE html>
+<html>
+<!-- Video element (live stream) -->
+<label>Video Stream</label>
+<video autoplay id="video" width="640" height="480" style="background-color:green;"></video>
+ 
+<!-- Canvas element (screenshot) -->
+<label>Screenshot (base 64 dataURL)</label>
+<canvas id="canvas" width="640" height="480" style="background-color:black;"></canvas>
+ 
+<!-- Capture button -->
+<button id="capture-btn">Capture!</button>
+ 
+<!-- Image URL output -->
+<label>Image URL</label>
+<input type="text" id="image-url-input" disabled>
 <script>
-function showMessage() {
-        mymessage='<p class="modalmsg">This page allows you to snap a photo with your webcam. Think of a place or thing that reminds you of Luke and Dana, and take a picture of it! </p> <p class="modalmsg"> Note: you will need to grant access to your webcam to take a picture. A security bar will likely appear at the top of your screen. Please select "Allow" to enable the webcam.<p>'
-        bootbox.dialog({message:mymessage, title:'Take Photos', show: true, backdrop: true, closeButton: false, animate: true,  className: "my-photo-modal", buttons: {continue: {label: "Continue!", className: "btn-cont",callback: function() {}}}});
-    }
-</script>
-<div id="flexcontent">
-    <div id="messagediv">
-        <p></p>
-    </div>
-    <div id="recorderdivphoto">
-            <video autoplay id="video" width="640" height="480"></video>
-           <!-- <div id="reviewimagediv"><canvas id="reviewimage" src="tempimg.png"/></canvas></div>-->
-            <div id="reviewimagediv"><canvas id="canvas" width="640" height="480" ></canvas></div>
-            <button class="mybutton" id="takephoto"><i class="camera"></i>Take Photo</button>
-            <!--<form name="myform" action="cgi-bin/save.py" method="post">-->
-            <form name="myform" action="save.py" method="post">
-			<input type="hidden" name="photofield" id="photofield" value="noimg">
-            <input type="submit" class="mybutton" id="submitphoto" value="Submit Photo">
-            </form>
-        <script>
-            showMessage();
-        </script>
-    </div>
-</div>
-<script> 
-function updateoptions() {
-        $('#video').hide();
-        $('#takephoto').hide();
-        $('#reviewimagediv').css('display','inline-block');
-        $('#submitphoto').show();
-}
-function onError(errorId,errorMsg) {
-        $( "#takephoto" ).attr( "disabled", true );
-        alert(errorMsg);
-}
-function saveImage(url){
-    console.log('saving')
-    console.log(url)
-    $( "#photofield" ).val(url);
-    console.log('saved')
-}
-(function () {
+(function() {
  
 	// Our element ids.
 	var options = {
-		video: '#webcamphoto',
-		canvas: '#reviewimage',
-		captureBtn: '#takephoto',
-		imageURLInput: '#photofield'
+		video: '#video',
+		canvas: '#canvas',
+		captureBtn: '#capture-btn',
+		imageURLInput: '#image-url-input'
 	};
- console.log(options.canvas)
- console.log(document.querySelector(options.canvas))
+ 
 	// Our object that will hold all of the functions.
 	var App = {
 		// Get the video element.
@@ -124,16 +96,51 @@ function saveImage(url){
 				// Draw whatever is in the video element on to the canvas.
 				that.ctx.drawImage(video, 0, 0);
 				// Create a data url from the canvas image.
-				dataURL = canvas.toDataURL('image/jpeg');
-                console.log(dataURL)
+				dataURL = canvas.toDataURL('image/png');
 				// Call our method to save the data url to an image.
-				////that.saveDataUrlToImage();
-                updateoptions()
-                console.log('updated')
-                saveImage(dataURL)
+				that.saveDataUrlToImage();
 			 }
 		},
-    }
+		
+		saveDataUrlToImage: function () {
+			var that = this;
+			var options = {
+				// Change this to your own url.
+				url: 'http://example.com/dataurltoimage'
+			};
+			
+			// Only place where we need jQuery to make an ajax request
+			// to our server to convert the dataURL to a PNG image,
+			// and return the url of the converted image.
+			that.imageURLInput.value = 'Fetching url ...';
+			$.ajax({
+				url: options.url,
+				type: 'POST',
+				dataType: 'json',
+				data: { 'data_url': dataURL },
+				complete: function(xhr, textStatus) {
+				// Request complete.
+				},
+				// Request was successful.
+				success: function(response, textStatus, xhr) {
+					console.log('Response: ', response);
+					// Conversion successful.
+					if (response.status_code === 200) {
+						imageURL = response.data.image_url;
+						// Paste the PNG image url into the input field.
+						that.imageURLInput.value = imageURL;
+                                                that.imageURLInput.removeAttribute('disabled');
+					}
+				},
+				error: function(xhr, textStatus, errorThrown) {
+					// Some error occured.
+					console.log('Error: ', errorThrown);
+					imageURLInput.value = 'An error occured.';
+				}
+			});
+		}
+ 
+	};
  
 	// Initialize our application.
 	App.initialize();
@@ -142,8 +149,5 @@ function saveImage(url){
 	window.App = App || {};
  
 })();
-</script> 
-{%endblock%}
-
-
-
+</script>
+</html>

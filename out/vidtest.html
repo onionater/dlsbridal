@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<h1>Simple web camera display demo</h1>
+<video autoplay></video>
+<script>
+navigator.getUserMedia  = navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia;
+    
+var video = document.querySelector('video');
+    
+function hasGetUserMedia() {
+    console.log(navigator.getUserMedia)
+    console.log(navigator.webkitGetUserMedia)
+    console.log(navigator.mozGetUserMedia)
+    console.log(navigator.msGetUserMedia)
+  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+function startRecording() {
+        streamRecorder = webcamstream.record();
+        setTimeout(stopRecording, 10000);
+    }
+function stopRecording() {
+        streamRecorder.getRecordedData(postVideoToServer);
+    }
+function postVideoToServer(videoblob) {
+
+        var data = {};
+        data.video = videoblob;
+        data.metadata = 'test metadata';
+        data.action = "upload_video";
+        jQuery.post("http://mindhive.mit.edu/saxe/aesvid/save.py", data, onUploadSuccess);
+    }
+function onUploadSuccess() {
+        alert ('video uploaded');
+    }
+
+if (hasGetUserMedia()) {
+  alert('webkitgetUserMedia() is supported in your browser!');
+} else {
+  alert('webkitgetUserMedia() is not supported in your browser');
+}
+  var errorCallback = function(e) {
+    console.log('Reeeejected!', e);
+  };
+window.URL = window.URL || window.webkitURL;
+navigator.getUserMedia  = navigator.getUserMedia || 
+                             navigator.webkitGetUserMedia ||
+                              navigator.mozGetUserMedia || 
+                               navigator.msGetUserMedia;
+
+var video = document.querySelector('video');
+var streamRecorder;
+var webcamstream;
+
+  // Not showing vendor prefixes.
+  navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
+    var video = document.querySelector('video');
+    video.src = window.URL.createObjectURL(localMediaStream);
+    webcamstream = localMediaStream;
+    //  streamrecorder = webcamstream.record();
+
+    // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
+    // See crbug.com/110938.
+    video.onloadedmetadata = function(e) {
+      // Ready to go. Do some stuff.
+    };
+  }, errorCallback);
+
+</script>
+<div id="webcamcontrols">
+    <button class="recordbutton" onclick="startRecording();">RECORD</button>
+    <button class="stopbutton" onclick="stopRecording();">STOP</button>    
+</div>
+</html>

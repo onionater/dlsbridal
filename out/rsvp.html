@@ -9,6 +9,8 @@
         <link rel="stylesheet/less" type="text/css" href="dlsbridal.less" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
         <script src="less-1.6.0.min.js" type="text/javascript"></script>
+        <!--for prettier file input-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
         <!--prettier dialogs!-->
         <script src="bootbox.min.js" type="text/javascript"></script>
         <!-- Latest compiled and minified bootstrap JavaScript-->
@@ -38,7 +40,7 @@
 <div id="flexcontent">
     <div id="rsvp">
         <h4>Please RSVP:</h4>
-        <form name="myform" action="save.py" method="post">
+        <form name="myform" action="cgi-bin/save.py" method="post">
         <input id="rsvptext"type="text" name="rsvpname" placeholder="enter your name here">
         <div id="rsvpselect">
         <select name="rsvpvalues" class="rsvpvalues">
