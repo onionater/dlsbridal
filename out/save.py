@@ -8,7 +8,7 @@ import random
 
 myform=cgi.FieldStorage()
 cgitb.enable()
-cursor = #MySQLdb.connect(host="localhost",user="askerry",passwd="password",db="aesbehave").cursor()
+cursor = MySQLdb.connect(host="localhost",user="askerry",passwd="password",db="aesbehave").cursor()
 
 print 'Content-type:text/html\n\n'
 #print 'testing'
@@ -43,15 +43,13 @@ try:
 except:
     pass
 try:
-    print sql
     cursor.execute(sql)
 except:
     pass
 try:
-    contentvar='photo'
     photo64=myform['uploadedphotos']
     photo64=photo64.value.split(',')
-    #print len(photo64)
+    contentvar='photo'
     for photo in photo64:
         if 'base64' not in photo:
             #print photo

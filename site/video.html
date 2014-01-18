@@ -3,22 +3,29 @@
 <script>
 webcamheight=640;
 webcamwidth=480;
+playing=1;
     $(document).ready(function() {
         $("#webcamvideo").scriptcam({ 
             cornerRadius:20,
-            cornerColor:'e3e5e2',
-            //onError:oopsError,
+            cornerColor:'000000',
+            onError:oopsError,
             showMicrophoneErrors:false,
-            fileName:'dlsfile',
+            onWebcamReady: showHWA,
+            fileName:'demofilename',
             connected:showRecord,
             width: webcamheight,//560,
             height: webcamwidth,//420,
             promptWillShow: showMessage,
-            setVolume: volume
+            setVolume: volume,
+            country: 'usa',
+            showDebug: true
         });
     });
+    function showHWA() {
+    alert($.scriptcam.hardwareacceleration());
+    }
     function volume(value){
-    console.log(value)
+    //console.log(value)
     }
     function showMessage() {
         mymessage='<br><p class="modalmsg">Record any kind of message you wish to pass along to Dana and Luke: a song, a poem, an interpretative dance, or just a quick video wishing them good luck! </p> <p class="modalmsg"> You will need to grant permission for the website to access your webcam for this option to work. A (very ugly) security dialog will be shown--please select ALLOW to record your video. If you want to record audio but not video, just cover your webcam. Very high-tech :).</p>';
@@ -36,22 +43,23 @@ webcamwidth=480;
         $.scriptcam.startRecording();
     }
     function closeCamera() {
-        $("#slider").slider( "option", "disabled", true );
+        $.scriptcam.closeCamera();
+        console.log('camera closed');
         $("#recordPause" ).attr( "disabled", true );
         $("#recordStop" ).attr( "disabled", true );
         $("#videosaved" ).attr( "value", 1);
         $( "#mybuttongroup" ).hide();
         $( "#vidsubmit" ).show();
-        $.scriptcam.closeCamera();
-        $('#message').html('Please wait for the file conversion to finish...');
     }
     function pauseResumeCamera() {
-        if ($( "#recordPause" ).html() == 'Pause Recording') {
-            $( "#recordPause" ).html( "Resume Recording" );
+        if (playing) {
+            $( "#recordPause" ).html('<i class="record"></i>Resume Recording');
+            playing=0;
             $.scriptcam.pauseRecording();
         }
         else {
-            $( "#recordPause" ).html( "Pause Recording" );
+            $( "#recordPause" ).html('<i class="pause"></i>Pause Recording');
+            playing=1;
             $.scriptcam.resumeRecording();
         }
     }
