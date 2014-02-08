@@ -7,7 +7,7 @@
     <div id="uploaddiv">
         <!--<form name="myform" action="cgi-bin/save.py" method="post">-->
         <form name="myform" action="save.py" method="post">
-        <span id="uploader" class="myupload" onclick="fileselector.click()">Select photos to upload<input type="file" id="fileselector" name="files[]" multiple /></span>
+        <span id="uploader" class="myupload" onclick="fileselector.click()">Select photos to upload<input type="file" id="fileselector" accept=".gif,.jpg,.jpeg,.png" name="files[]" multiple /></span>
         <input type="hidden" name="uploadedphotos" id="uploadedphotos">
         <input type="submit" class="mybutton" id="submituploadedphotos" value="Submit Photos">
         <output id="thumbnaildisplay"></output>

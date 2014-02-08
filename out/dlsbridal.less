@@ -5,7 +5,7 @@
 //@import "bootswatch-variables.less";
 //@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css");
 //@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css");
-//go here to check out good fonts... http://www.google.com/fonts#ReviewPlace:refine/Collection:Source+Sans+Pro:400,600|Cabin:400,700|News+Cycle|Istok+Web:400,700|Gudea:400,700|Signika:400,600|Rosario:400,700|Roboto:400,700|Roboto+Condensed:400,700|Open+Sans:400,600|Quattrocento+Sans:400,700
+//good fonts... http://www.google.com/fonts#ReviewPlace:refine/Collection:Source+Sans+Pro:400,600|Cabin:400,700|News+Cycle|Istok+Web:400,700|Gudea:400,700|Signika:400,600|Rosario:400,700|Roboto:400,700|Roboto+Condensed:400,700|Open+Sans:400,600|Quattrocento+Sans:400,700
 
 //@my-font-family: 'Source Sans Pro', sans-serif;
 @my-font-family: 'Istok Web', sans-serif;
@@ -14,35 +14,30 @@
 //@my-font-family: 'Open Sans', sans-serif;
 @light1:#DCDDD8;
 @light2:#a7abae;
-@accent1:#99B280;//#D74B4B;
-@accent2:#6C8CBF;//#476F9F;
-@accent2dark:#4C6286;
-@dark1:#354B5E;
+@darkerlight2:#85898d;
+@linkdefault:rgb(219,111,99);
+@linkhover:rgb(245, 172, 96);
+@buttonhover:rgb(254, 190, 156);//(160, 72, 50);
+//@accent1:rgb(241, 148, 136);
+@accent2:rgb(221, 128, 116);
+@accent2dark:rgb(190, 128, 126);
+@accent2emph:rgb(190, 108, 106);
+@accent4:rgb(231, 97, 61);
+//@accent1:rgb(130, 124, 148);//#551166;//#D74B4B;
+//@accent2:rgb(85, 85, 126);
+//@accent2dark:rgb(80, 80, 120);
 @dark2:#17273B;
-//
-//@dark1:#17375B;
-//@dark2:#17273B;
-//@light1:#AADDFF;
-//@light2:#CCEEFF;
-//@accent1:#1188cc;
-//@accent2:#11aaff;
-//@accent4:@brand-info;
+
 @bgcolor:@light1;
 @fontcolor:@light1;
-@shadow: .5em .5em 20px black;
+@mainshadow: 0em .5em 30px 1px black;
+//@insetshadow: 0 .2em 60px 15px black;
 @lightshadow: .1em .2em 15px @dark2;
+@lightestshadow: .05em .1em 10px @dark2;
 @darkshadow: .2em .3em 20px @dark2;
-//@darkfont:@dark1;
-//@lightfont:@light1;
+@downshadow: .1em .2em 20px black;
 @defaultpadding: 3em;
 @docheight:47em;
-
-/*boxes keep things size appropriately regardless of borders, etc*/
-* {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
 
 body{
     font-size: @font-size-base;
@@ -63,12 +58,17 @@ p, h1, h2, h3, h4, h5 {
     height:100%;
     min-height:@docheight+2em;
     background-color:@light2;
+    //#gradient.vertical(@light2, @darkerlight2);
+    background-image:url('reppats/nyurep.png');
+    background-repeat:repeat;
 }
 //navbar
 #mynavbardiv{
     position:absolute;
     .navbar;
     .navbar-inverse;
+    border-radius:0px !important;
+    margin-bottom:0em;
     width:100%;
     padding:.2em;
     padding-top:.3em;
@@ -87,26 +87,30 @@ p, h1, h2, h3, h4, h5 {
     position:relative;
     border-radius:5px;
     height:@docheight;
-    width:70em;
+    width:72em;
     top:.5em;
-    background-color:@bgcolor;
+    background-color:@darkerlight2;
     margin:auto;
+    overflow:hidden;
+    .box-shadow(@mainshadow);
     //#gradient.vertical(@accent1, white);
     //border: solid;
 }
 #sidepanel{
     position:absolute;
-    width:21%;
-    height:85%;
-    left:1em;
-    padding:1em;
-    background-color:@accent1;
+    width:28%;
+    height:91%;
+    left:0em;//1em;
+    //padding:1em;
+    background-color:@accent2;
+     /*background-image:url('http://www.photoannouncementsweddinginvitations.com/Background-Catalog/Patterns-13-R.jpg');
+    background-repeat:repeat;*/
 }
 #flexcontentwrapper{
     position:absolute;
-    width:76%;
-    height:85%;
-    right:1em;
+    width:72%;
+    height:91%;
+    right:0em;//1em;
     padding:1%;
     background-image:url('nyc_skyline.jpg');
     background-size:cover;
@@ -115,16 +119,19 @@ p, h1, h2, h3, h4, h5 {
 }
 #flexcontent{
     position:absolute;
-    width:76%;
-    height:85%;
-    right:1em;
+    width:72%;
+    height:91%;
+    right:0em;//1em;
     background-color: rgba(5,5,5,.7)
 }
 .link{
-    color:@accent2;
+    color:@linkdefault;
+}
+.link:hover{
+    color:@linkhover;
 }
 //sidepanel
-#title{
+/*#title{
     color:@dark2;
     text-align:center;
     margin-top:1em;
@@ -135,6 +142,35 @@ p, h1, h2, h3, h4, h5 {
 }
 #coupleimg{
     .img-responsive;
+}*/
+.polaroid {
+  position: absolute;
+  width:92%;
+  height:72%;
+  margin:4%;
+  background-color:@light1;
+  .box-shadow(@downshadow);
+}
+ 
+#coupleimage {
+ position:absolute;
+  width:94%;
+  height:76%;
+  margin:3%;
+  background-image:url("lukedana3.jpg");
+  background-size:contain;
+  background-repeat:no-repeat;
+  //.box-shadow(inset @insetshadow);
+}
+ 
+.polaroid p {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  padding:1%;
+  bottom:.5em;
+  font: 400 1.7em/1.1em 'Kaushan Script', cursive;
+  color: @darkerlight2;
 }
 //info
 #info{
@@ -227,6 +263,7 @@ h3{
 .mybutton{
     .btn;
     .btn-primary;
+    border:none;
     font-family: @my-font-family;
     background-color:@accent2;
     #gradient.vertical(@accent2, @accent2dark);
@@ -234,6 +271,13 @@ h3{
     padding-right:1.5em;
     margin-left:1em;
     margin-right:1em;
+    &:active{
+    background-color: @accent4;
+    border-color: @accent4;
+    }
+    &:hover{
+    color:@buttonhover;
+}
 }
 .mybuttonfixed{
     .mybutton;
@@ -273,7 +317,7 @@ h3{
     .box-shadow(@darkshadow);
 }
 #takephoto{
-    .btn-block;
+    //.btn-block;
     width:60%;
     margin:auto;
     margin-top:2em;
@@ -287,10 +331,78 @@ h3{
 #write{
     padding:@defaultpadding;
 }
+#recipe{
+    #write;
+}
 #textmessage{
     .form-control;
     .box-shadow(inset @lightshadow);
 }
+#recipetitle, #recipeing, #recipeinst, #recipehist, #recipenut,  {
+    #textmessage;
+    .box-shadow(inset @lightestshadow);
+    padding-top:.5em;
+    padding-bottom:.5em;
+    line-height:1.1em;
+    margin-top:1em;
+    //background-color:@light1;
+    opacity:.85;
+}
+#recipeauthor {
+    #recipetitle;
+    height:2.35em;
+    margin-top:.75em;
+    width:46%;
+    left:0em;
+}
+.recipeselect{
+    position:absolute;
+    right:3em;
+    top:3.6em;//6.55em;
+    width:46%;
+}
+.recipetypes{
+    opacity:.85;
+    .rsvpvalues;
+}
+#recipetitle:focus , #recipeing:focus , #recipeinst:focus , #recipehist:focus , #recipenut:focus, #recipeauthor:focus, .recipetypes:focus {
+    opacity:1;
+}
+.recipephotoupload{
+    .mybutton;
+    position:absolute;
+    left:2em;
+    width:35%;
+    margin-top:1em;
+}
+#recipesavebtn{
+    #savebtn;
+    margin-top:4em;
+}
+#clearbutton{
+    .mybutton;
+    position:absolute;
+    left:2em;
+    width:35%;
+    margin-top:4em;  
+}
+#recipefileselector{
+    width:100%;
+    display:none;
+}
+#recipethumbnaildisplay{
+    position:absolute;
+    background-color:green;
+    left:21em;
+    margin:2em;
+    margin-top:1em;
+    padding-top:0em;
+}
+.recipethumbnail {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 0px 0px 0 0;
+  }
 #savebtn{
     .mybutton;
     position:absolute;
@@ -340,7 +452,7 @@ h3{
 }
 .myupload{
     .mybutton;
-    width:45%;
+    width:35%;
 }
 #fileselector{
     width:100%;

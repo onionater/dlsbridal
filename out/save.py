@@ -14,8 +14,8 @@ print 'Content-type:text/html\n\n'
 #print 'testing'
 #print myform.keys()
 #print myform.items()
-contentvar='?'
-try:
+contentvar=' '
+try: 
     rsvpname=myform['rsvpname']
     rsvpval=myform['rsvpvalues']
     contentvar="RSVP"
@@ -35,6 +35,35 @@ try:
     msg=myform['textmessage']
     contentvar="text"
     sql='insert into DLSMSG (msg) values ("%s")' %(msg.value)
+except:
+    pass
+try:
+    recipevars=['recipetitle', 'recipeing', 'recipeinst','recipehist', 'recipenut', 'recipeauthor','recipetype']
+    recipevariables=[]
+    recipevalues=[]
+    for var in recipevars:
+        try:
+            value=myform[var].value
+            recipevariables.append(var)
+            recipevalues.append(value)
+        except: 
+            pass
+    try:
+        photo64=myform['recipephoto']
+        photo64= photo64.value.split(',')
+        for photo in photo64:
+            if 'base64' not in photo:
+                recipevalues.append(photo)
+                recipevariables.append('recipephoto')
+    except:
+        pass
+    if recipevariables:
+        contentvar="recipe"
+        recipevariablesstr=', '.join(recipevariables)
+        recipevaluesstr='", "'.join(recipevalues)
+        recipevaluesstr='"'+recipevaluesstr+'"'
+        sql='insert into DLSRECIPE ('+recipevariablesstr+') values ('+recipevaluesstr+')' 
+        #print sql
 except:
     pass
 try:

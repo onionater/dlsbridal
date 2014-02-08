@@ -3,7 +3,10 @@
 <div id="flexcontent">
     <div id="rsvp">
         <h4>Please RSVP:</h4>
+<!--
         <form name="myform" action="cgi-bin/save.py" method="post">
+-->
+        <form name="myform" id="myform"  action="save.py" method="post">
         <input id="rsvptext"type="text" name="rsvpname" placeholder="enter your name here">
         <div id="rsvpselect">
         <select name="rsvpvalues" class="rsvpvalues">
@@ -11,7 +14,7 @@
           <option value="no">No, I can't make it</option>
           <option value="maybe">I'm not sure yet</option>
         </select>
-        <div id="rsvpsubmit"><input type="submit" class="mybutton" id="submitrsvp" value="SAVE"></div>
+        <div id="rsvpsubmit"><input type="button" class="mybutton" id="submitrsvp" onclick="validateRSVP()" value="SAVE"></div>
         </form>
         </div>
         

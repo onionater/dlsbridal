@@ -11,6 +11,8 @@
         <script src="less-1.6.0.min.js" type="text/javascript"></script>
         <!--prettier dialogs!-->
         <script src="bootbox.min.js" type="text/javascript"></script>
+        <!--fancy poloroid font-->
+        <link href="http://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
         <!-- Latest compiled and minified bootstrap JavaScript-->
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 		<!-- Please download the JW Player plugin from http://www.longtailvideo.com/jw-player/download
@@ -23,14 +25,18 @@
         <div id="maincontainer">
         <div id="mynavbardiv">
             <ul id="mynavbar">
-            <li><a class="link" href="index.html">Bridal Shower Info</a></li>
+            <li><a class="link" href="index.html">SHOWER INFO</a></li>
             <li><a class="link" href="rsvp.html">RSVP</a></li>
-            <li><a class="link" href="gifts.html">Gifts</a></li>
-            <li><a class="link" href="http://www.weddingwire.com/wedding/UserViewWebsite?wid=8ca4ec51ebcfd05b&themeCode=&is_demo=">Wedding Site</a></li>
+            <li><a class="link" href="gifts.html">GIFTS</a></li>
+            <li><a class="link" href="http://www.weddingwire.com/wedding/UserViewWebsite?wid=8ca4ec51ebcfd05b&themeCode=&is_demo=">WEDDING SITE</a></li>
             </ul></div> 
         <div id="sidepanel">
-            <p id="title">Congrats Dana & Luke!</p>
-            <img id="coupleimg" src="lukedana.jpg">
+            <!--<p id="title">Congrats Dana & Luke!</p>
+            <img id="coupleimg" src="lukedana.jpg">-->
+            <div class="polaroid">
+            <div id="coupleimage"></div>
+            <p>Congratulations <br> Luke and Dana</p>
+            </div>
             </div>
             <div id=flexcontentwrapper> <!--heh not actually a wrapper-->
             </div>
@@ -181,5 +187,25 @@ function saveImage(url){
 
 	   </div>
      </div>
+        <script>
+        function validateRSVP(){
+        rsvp=$("#rsvptext").val();
+        console.log('validating')
+        console.log(rsvp)
+        if (rsvp==""){
+        bootbox.alert("Oops! Please enter your name");
+               }
+        else {document.getElementById("myform").submit();}}
+        </script>
+         <script>
+        function validatetext(){
+        msg=$("#textmessage").val();
+        console.log('validating')
+        console.log(msg)
+        if (msg==""){
+        bootbox.alert("Oops! Please enter text.");
+               }
+        else {document.getElementById("myform").submit();}}
+        </script>
     </body>
 </html>

@@ -1,5 +1,5 @@
 #!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
-#!/usr/bin/python
+###!/usr/bin/python
 
 import cgitb, cgi, MySQLdb, ast
 #import cgitb, cgi, ast
@@ -8,7 +8,7 @@ import random
 
 myform=cgi.FieldStorage()
 cgitb.enable()
-#cursor = #MySQLdb.connect(host="localhost",user="askerry",passwd="password",db="aesbehave").cursor()
+#cursor = MySQLdb.connect(host="localhost",user="askerry",passwd="password",db="aesbehave").cursor()
 
 print 'Content-type:text/html\n\n'
 #print 'testing'
@@ -38,20 +38,48 @@ try:
 except:
     pass
 try:
+    recipevars=['recipetitle', 'recipeing', 'recipeinst','recipehist', 'recipenut', 'recipeauthor','recipetype']
+    recipevariables=[]
+    recipevalues=[]
+    for var in recipevars:
+        try:
+            value=myform[var].value
+            recipevariables.append(var)
+            recipevalues.append(value)
+        except: 
+            pass
+    try:
+        photo64=myform['recipephoto']
+        photo64= photo64.value.split(',')
+        for photo in photo64:
+            if 'base64' not in photo:
+                contentvar="photo"
+                recipevalues.append(photo)
+                recipevariables.append('recipephoto')
+    except:
+        pass
+    if recipevariables:
+        contentvar="recipe"
+        recipevariablesstr=', '.join(recipevariables)
+        recipevaluesstr='", "'.join(recipevalues)
+        recipevaluesstr='"'+recipevaluesstr+'"'
+        sql='insert into DLSRECIPE ('+recipevariablesstr+') values ('+recipevaluesstr+')' 
+        #print sql
+except:
+    pass
+try:
     vid=myform['videosaved']
     contentvar="video"
 except:
     pass
 try:
-    print sql
     cursor.execute(sql)
 except:
     pass
 try:
-    contentvar='photo'
     photo64=myform['uploadedphotos']
     photo64=photo64.value.split(',')
-    #print len(photo64)
+    contentvar='photo'
     for photo in photo64:
         if 'base64' not in photo:
             #print photo
@@ -68,5 +96,5 @@ except:
 with open("saved.html", "r") as myfile: 
     newhtml=myfile.read().replace('\n', '') 
 newhtml=newhtml.replace('CONTENTVARIABLESTRING',contentvar)
-print newhtml 
+#print newhtml 
 

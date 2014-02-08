@@ -1,0 +1,86 @@
+{% extends "/base.html" %}
+{%block mainbody%}
+<div id="flexcontent">
+    <div id="recipe">
+        <!--<form name="myform" action="cgi-bin/save.py" method="post">-->
+        <form name="myform" action="save.py" method="post">
+        <p>Please enter a favorite recipe for Dana and Luke!:</p>
+        <!--<textarea id="recipetitle" name="recipetitle"  rows="1" placeholder="RECIPE NAME"></textarea>-->
+        <input type="text" id="recipeauthor" name="recipeauthor" placeholder="YOUR NAME" size:"10">
+        <div class="recipeselect">
+        <select class="recipetypes" id="recipetypes" name="recipetype">
+            <option value="none">RECIPE TYPE</option>
+            <option value="appetizer">appetizer</option>
+            <option value="salad">salad</option>
+            <option value="side">side</option>
+            <option value="brunch">brunch</option>
+            <option value="main">main</option>
+            <option value="dessert">dessert</option>
+            <option value="drink">drink</option>
+        </select>
+        </div>
+        <textarea id="recipetitle" name="recipetitle"  rows="1" placeholder="RECIPE NAME"></textarea>
+        <textarea id="recipeing" name="recipeing"  rows="3" placeholder="INGREDIENTS"></textarea>  
+        <textarea id="recipeinst" name="recipeinst"  rows="4" placeholder="INSTRUCTIONS"></textarea>  
+        <textarea id="recipehist" name="recipehist"  rows="2" placeholder="HISTORY (Does this recipe have a special history or story? Tell us about it!)"></textarea>
+        <textarea id="recipenut" name="recipenut"  rows="2" placeholder="NUTRITIONAL INFO (optional)"></textarea>
+        <span id="uploader" class="recipephotoupload" onclick="recipefileselector.click()">Upload photo of dish (optional)<input type="file" id="recipefileselector" name="files[]" multiple /></span>
+        <input id="clearbutton" type="button" onclick=clearphotostring() value="Clear photo selection" disabled>
+        <input type="hidden" name="recipephoto" id="recipephoto">
+        <output id="recipethumbnaildisplay"></output>
+        <input id="recipesavebtn" class="mybutton" type="submit" value="Save">
+        </form>
+    </div>
+
+</div>
+<script>
+function clearphotostring() {
+    base64sToUpload= new Array ();
+    console.log(base64sToUpload);
+    document.getElementById('recipephoto').value="";
+    $('#recipethumbnaildisplay').empty();
+    $('#clearbutton').attr("disabled", true)
+    return base64sToUpload
+}
+base64sToUpload= new Array()
+  function handleFileSelect(uploadevent) {
+    var files = uploadevent.target.files; // FileList object
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+      // if you want to display thumbnail
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+            console.log(e)
+            console.log('base64output:')
+            console.log(e.target.result)
+            base64sToUpload.push(e.target.result);
+            document.getElementById('recipephoto').value=base64sToUpload;
+            $('#clearbutton').attr("disabled", false)
+          span.innerHTML = ['<img class="recipethumbnail" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('recipethumbnaildisplay').insertBefore(span, null);
+          console.log('recipe photo')
+          console.log(document.getElementById('recipephoto').value)
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      base64=reader.readAsDataURL(f);
+
+    }
+  document.getElementById('recipefileselector').addEventListener('change', handleFileSelect, false);
+  }
+
+  document.getElementById('recipefileselector').addEventListener('change', handleFileSelect, false);
+</script>
+{%endblock%}
