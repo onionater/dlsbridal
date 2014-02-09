@@ -96,4 +96,3 @@ with open("saved.html", "r") as myfile:
     newhtml=myfile.read().replace('\n', '') 
 newhtml=newhtml.replace('CONTENTVARIABLESTRING',contentvar)
 print newhtml 
-
