@@ -31,8 +31,14 @@ with open(photofile, 'rU') as csvfile:
             cutstring=''
             photo=photoentry[len(cutstring):]
             allphotos.append(photo)
+    print str(rown)+ ' lines in csv file'
     
 for photon, photo in enumerate(allphotos):
-    g = open(savedir+'photo'+str(photon)+'_'+datestr+'.jpg', 'w')
+    if photon<99:
+        number='0'+str(photon)
+    else:
+        number=str(photon)
+    g = open(savedir+'photo'+number+'_'+datestr+'.jpg', 'w')
     g.write(base64.decodestring(photo))
     g.close()
+print number + ' photos printed'
